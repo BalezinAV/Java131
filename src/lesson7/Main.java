@@ -26,7 +26,7 @@ public class Main {
         // Продолжить часть 1 (0.19) Задача.
 // Задача. Массив.
 //        int[] mas = {1, 3, 5, 7, 9};
-//        System.out.println(sumList(mas)); // Что бысюда осуществлялся вывод, нудно чтобы это было возвращаемое значение, то есть нужен retern.
+//        System.out.println(sumList(mas)); // Что бы сюда осуществлялся вывод, нужно чтобы это было возвращаемое значение, то есть нужен retern.
 //    } //End main. Start public.
 //    public static int sumList(int[] arr){
 //        int sum = 0;

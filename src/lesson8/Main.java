@@ -24,7 +24,7 @@ public class Main {
 //        }
 
         // Исключения в массиве
-//        try { // try без catch бфть не может!
+//        try { // try без catch быть не может!
 //            int[] numbers = new int[3];
 //        numbers[4] = 9;
 //    } catch (ArrayIndexOutOfBoundsException e){
@@ -32,7 +32,7 @@ public class Main {
 //            System.out.println("Введен некорректный индекс");
 //        }
 
-        //Задача факторриал 5! = 1*2*3*4*5;
+        //Задача факториал 5! = 1*2*3*4*5;
 //        int res = getFactorial(-5);
 //        System.out.println(res);
 //    }
