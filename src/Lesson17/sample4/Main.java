@@ -22,3 +22,39 @@ public class Main { // Переходим в пакет sample4 11.03.24 -2- 1.0
         System.out.println(word2 + " это палинтром: " + res);
     }
 } // ДЗ 29 от 11.03.24 -2- 1.24 на функциональный интерфейс Predicate. Найти что такое простое число.
+
+//        Supplier<User> userSupplier = () -> { // Создали тип данных User
+//            Scanner input = new Scanner(System.in);
+//            System.out.print("Введите имя: ");
+//            String name = input.nextLine();
+//            return new User(name);
+//        };
+//
+//        User user1 = userSupplier.get(); // new User(name) - возвращает значение вместо вызова метода
+//        User user2 = userSupplier.get();
+//
+//        System.out.println("Имя пользователя 1: " + user1.getName());
+//        System.out.println("Имя пользователя 2: " + user2.getName());
+
+//        Consumer<Integer> printer = x -> System.out.printf("%d долларов %n", x);
+//        printer.accept(700); // Возвращает отформатированном виде текст.
+//
+//        Consumer<String> printUpperCase = str -> System.out.println(str.toUpperCase());
+//        printUpperCase.accept("Hello");
+
+//        int x = 5;
+//        UnaryOperator<Integer> squaer = x -> x * x; // Прминимает и возвращает один тип данных.
+//        System.out.println(squaer.apply(5)); // Принял аргумент, произвел дейтвия и вернул измененый элемент.
+//    } // переходим в пакет sample5 13.03.24 -1- 0.39
+//            }
+
+//class User{
+//    private String name;
+//    public User(String name){ // Конструктор
+//        this.name = name;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//}
