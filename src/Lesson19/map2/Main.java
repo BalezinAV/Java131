@@ -30,7 +30,7 @@ public class Main { // Переходим в пакет map2 -2- 25.03.24
         }
         System.out.println("================");
         for (Double value : map.values()) {
-            System.out.println(value); // Возвращаем тольео значения
+            System.out.println(value); // Возвращаем только значения
         }
     } // 25.03.24 -2- 0.41 переходим в пакет map3
 }
