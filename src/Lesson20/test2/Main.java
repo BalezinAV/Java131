@@ -1,6 +1,7 @@
 package Lesson20.test2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {// Переходим в пакет тест2 01.04.24 -2- 0.10
@@ -14,15 +15,30 @@ public class Main {// Переходим в пакет тест2 01.04.24 -2- 0.
 
         // Взяли для примера с конца документа
         List<String> phones = new ArrayList<>();
-        phones.addAll(Arrays.asList("iPhone X", "Nokia 9", "Huawei Nexus 6P", "Xiaomi MI6", "Samsung Galaxy S8", "LG G6", "ASUS Zenfone 3", "Sony Xperia Z5", "Meizu Pro 6", "Pixel 2"));
+//        phones.addAll(Arrays.asList("iPhone X", "Nokia 9", "Huawei Nexus 6P", "Xiaomi MI6", "Samsung Galaxy S8", "LG G6", "ASUS Zenfone 3", "Sony Xperia Z5", "Meizu Pro 6", "Pixel 2"));
+//        System.out.println(phones);
+
+        // пришли из тест 5 и 4
+        Collections.addAll(phones,"iPhone X", "iPhone X", "Nokia 9", "Huawei Nexus 6P", "Xiaomi MI6", "Samsung Galaxy S8", "LG G6", "ASUS Zenfone 3", "Sony Xperia Z5", "Meizu Pro 6", "Pixel 2");
         System.out.println(phones);
 
-        boolean any = phones.stream().anyMatch(s -> s.length() > 10);
-        System.out.println(any);
-        boolean all = phones.stream().allMatch(s -> s.length() > 10);
-        System.out.println(all);
-        boolean non = phones.stream().noneMatch(s -> s.length() < 2);
-        System.out.println(non);
+        List<String> filterPhones = phones.stream().filter(s -> s.length() < 10).collect(Collectors.toList());
+        System.out.println(filterPhones); // преобразовали в поток, для простоты обработки.
+
+        Set<String>filterPhones1 = phones.stream().filter(s -> s.length() < 10).collect(Collectors.toSet());
+        System.out.println(filterPhones1);
+        // вернулись из тест 4
+        // возвращаемся в тест 5
+        // возвращаемся в тест2 из тест2
+        TreeSet<String> filterPhones2 = phones.stream().filter(s -> s.length() < 10).collect(Collectors.toCollection(TreeSet::new));
+        System.out.println(filterPhones2);
+
+//        boolean any = phones.stream().anyMatch(s -> s.length() > 10);
+//        System.out.println(any);
+//        boolean all = phones.stream().allMatch(s -> s.length() > 10);
+//        System.out.println(all);
+//        boolean non = phones.stream().noneMatch(s -> s.length() < 2);
+//        System.out.println(non);
 
 //         Optional<String> first = phones.stream().findFirst();
 //        System.out.println(first.get());
