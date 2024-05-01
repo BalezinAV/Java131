@@ -1,26 +1,92 @@
 package homework;
-import java.util.Map;
-import java.util.HashMap;
+
 public class Trenirovka {
     public static void main(String[] args) {
-        HashMap<Integer, String> s = new HashMap<Integer, String>();
+        TrafficLightSimulator tl = new TrafficLightSimulator(TrafficLightColor.GREEN);
+            for (int i=0; i < 9; i++) {
+                System.out.println(tl.getColor());
+                tl.waitForChange();
+            }
+            tl.cancel();
+        }
+    }
 
-        s.put(4, "Value1");
-        s.put(5, "Value2");
+    enum TrafficLightColor {
+        RED, GREEN, YELLOW
+    }
 
-        for (Map.Entry en : s.entrySet()) {
-            System.out.println(en.getKey() + " " + en.getValue());
+    class TrafficLightSimulator implements Runnable {
+        private Thread thrd; // Поток для имитации светофора
+        private TrafficLightColor tic; // Текущий цвет светофора
+        boolean stop = false; // Остановка имитации, если истинно
+        boolean changed = false; // Переключение светофора, если истинно
+
+        TrafficLightSimulator(TrafficLightColor init) {
+            tic = init;
+
+            thrd = new Thread(this);
+            thrd.start();
         }
 
-        HashMap<String, Integer> newMap = new HashMap<String, Integer>();
-        for(Map.Entry<Integer, String> entry: s.entrySet()){
-            newMap.put(entry.getValue(), entry.getKey());
+        TrafficLightSimulator() {
+            tic = TrafficLightColor.RED;
+
+            thrd = new Thread(this);
+            thrd.start();
         }
 
-        for(Map.Entry<String, Integer> entry: newMap.entrySet()){
-            System.out.println(entry.getKey() + " " + entry.getValue());
+
+        public void run() {
+            while (!stop) {
+                try {
+                    switch (tic) {
+                        case GREEN:
+                            Thread.sleep(1000);
+                            break;
+                        case YELLOW:
+                            Thread.sleep(800);
+                            break;
+                        case RED:
+                            Thread.sleep(1200);
+                            break;
+                    }
+                } catch (InterruptedException exc) {
+                    System.out.println(exc);
+                }
+                changeColor();
+            }
+        }
+    synchronized void changeColor() {
+
+        switch(tic) {
+            case RED:
+                tic = TrafficLightColor.GREEN;
+                break;
+            case YELLOW:
+                tic = TrafficLightColor.RED;
+                break;
+            case GREEN:
+                tic = TrafficLightColor.YELLOW;
         }
 
-        System.out.println("***" + s.entrySet());
+        changed = true;
+        notify(); // уведомить о переключении цвета светофора
+    }
+    synchronized void waitForChange() {
+        try {
+            while(!changed)
+                wait(); // ожидать переключения цвета светофора
+            changed = false;
+        } catch(InterruptedException exc) {
+            System.out.println(exc);
+        }
+    }
+    TrafficLightColor getColor() {
+        return tic;
+    }
+    void cancel() {
+        stop = true;
     }
 }
+
+
