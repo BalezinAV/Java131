@@ -1,0 +1,48 @@
+8.	Сосчитать общее количество видов закупленных фирмой вафель.
+SELECT COUNT(Goods) AS "Вафли"
+FROM sallergoods
+WHERE Goods LIKE "%ваф%";
+9.	Определите сколько всего было продано килограмм яблок.
+-- SELECT ID AS "id_Ябллоки", Goods FROM sallergoods
+-- WHERE Goods LIKE "%ябл%";
+SELECT SUM(Count) AS "продано_КГ"
+FROM clientgoods
+WHERE ID = 133 OR ID = 160;
+10.	Определите какое количество картофеля закупили кафе.
+SELECT SUM(clientgoods.Count) AS "Картофель" FROM clientgoods, sallergoods, client
+WHERE sallergoods.Goods LIKE "%картоф%" AND client.Status LIKE "кафе" AND sallergoods.ID = clientgoods.ID AND clientgoods.iNNClient=client.iNNClient;
+11.	Посчитать сколько клиентов купили перец черный молотый.
+SELECT COUNT(clientgoods.ID) AS "Взяли перец" FROM clientgoods, sallergoods
+WHERE sallergoods.Goods LIKE "%черн%мол%" AND sallergoods.ID = clientgoods.ID;
+12.	Определить сколько наименований товара было куплено у посредников.
+SELECT COUNT(sallergoods.INNSeller) AS "Товары последников" FROM sallergoods, seller
+WHERE seller.Status LIKE "посредник" AND seller.INNSeller=sallergoods.INNSeller;
+13.	Определить минимальную цену за единицу проданного товара.
+SELECT MIN(CostUnit) AS "Минимальная стоимость товара" FROM clientgoods
+WHERE CostUnit <> 0;
+14.	Определите минимальную сумму на какую было закуплено товара.
+SELECT MIN(CostUnit * Count) AS "Минимальная сумма" FROM clientgoods
+WHERE CostUnit <> 0;
+15.	Определить максимальную сумму за товар, проданный магазинам.
+SELECT MAX(clientgoods.CostUnit * clientgoods.Count) AS "Максимальная сумма в магазин" FROM clientgoods, client
+WHERE client.Status LIKE "магазин" AND clientgoods.INNClient=client.INNClient;
+16.	Определить среднюю цену за пачку чая при покупке.
+SELECT ROUND(AVG(clientgoods.CostUnit), 1) AS "средня за чай" FROM clientgoods, sallergoods
+WHERE sallergoods.Goods LIKE "чай%" AND sallergoods.ID=clientgoods.ID;
+17.	Определите максимальную сумму прибыли за товар, проданный посреднику.
+SELECT MAX(clientgoods.CostUnit * clientgoods.Count) AS "Максимум от посредника" FROM clientgoods, client
+WHERE client.Status LIKE "посредник" AND client.INNClient=clientgoods.INNClient;
+18.	 Определите минимальную прибыль за товар, купленный у посредника.
+SELECT MIN(sallergoods.CostUnit * sallergoods.Count) AS "Миниму у посредника" FROM sallergoods, seller
+WHERE seller.Status LIKE "посредник" AND sallergoods.CostUnit <> 0 AND seller.INNSeller=sallergoods.INNSeller;
+19.	 Какое количество наименований товара куплено у фирмы.
+SELECT COUNT(DISTINCT ID) AS "Всего наименований" FROM clientgoods;
+20.	 Сколько в продаже видов печенья.
+SELECT COUNT(Goods) AS "Все печенье" FROM sallergoods
+21.	 Какая максимальная сумма покупки, на которую клиент сделал заказ.
+SELECT MAX(CostUnit * Count) AS "Максимальная сумма покупки" FROM clientgoods;
+22.	 Со сколькими посредниками сотрудничает фирма.
+-- SELECT COUNT(Status) AS "Всего посредников" FROM seller
+-- WHERE Status LIKE "посредник";
+-- SELECT COUNT(Status) AS "Всего посредников" FROM client
+-- WHERE Status LIKE "посредник";
