@@ -1,0 +1,29 @@
+ДЗ 44 от 15.05.24 db_11 Балезин SQL запросы
+3.	Соедините вместе все таблицы с помощью внешнего объединения.
+USE db_11;
+SELECT prodaves. *, klient. *, zakaz. * 
+FROM (prodaves INNER JOIN klient ON prodaves.ID_Pr=klient.ID_Pr) INNER JOIN zakaz
+ON klient.ID_Pr=zakaz.ID_Pr;
+
+4.	С помощью объединения вывести данные о скидках клиента для каждого продавца
+SELECT k.ID_KL, k.Discoun, p.ID_Pr, p.Name_Pr
+FROM klient K INNER JOIN prodaves P ON K.ID_Pr=P.ID_Pr;
+
+5.	Напишите запрос, который выведет все города, в которых живут продавцы и заказчики.
+SELECT City_KL AS 'города проживания' FROM klient
+UNION
+SELECT City_Pr FROM prodaves;
+
+6.	С помощью объединения вывести все данные о заказчиках и  заказах, даже если заказчик не сделал ни одного заказа за указанный период.
+SELECT klient. *, zakaz. *
+FROM klient INNER JOIN zakaz ON klient.ID_KL=zakaz.ID_KL;
+
+7.	Составьте запроса для вывода имен и кодов всех продавцов, в чьих городах есть покупатели, которых они не обслуживают. С помощью оператора в подзапросе.
+
+
+8.	Напишите запрос, который выведет все города и имена продавцов и заказчиков, которые живут в Лондоне.
+SELECT Name_Pr, City_Pr AS "Все из..." FROM prodaves
+WHERE City_Pr LIKE "London"
+UNION
+SELECT Name_KL, City_KL FROM klient
+WHERE City_KL LIKE "London";
