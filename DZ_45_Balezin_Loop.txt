@@ -1,0 +1,21 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DZ_loop_abc1_10`()
+    COMMENT 'Найти сумму числел от 1 до 10 используя цикл LOOP'
+BEGIN
+DECLARE i INT;
+DECLARE iSum INT;
+    SET i = 1;
+    SET iSum = 0;
+    SET @str = "";
+    countS: LOOP
+		IF i > 10 THEN
+			LEAVE countS;
+		END IF;
+        SET iSum = iSum + i;
+        SET i = i + 1;
+        SET @str = CONCAT(@str, iSum, " | ");
+        IF (i < 10) THEN
+			ITERATE countS;
+		END IF;
+	END LOOP countS;
+    SELECT @str AS EVEN;
+END
